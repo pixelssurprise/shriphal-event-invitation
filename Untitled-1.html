@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Opening Invitation | Aura Event Management</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --obsidian: #07100b;
+            --forest-deep: #0d1e15;
+            --forest: #12281c;
+            --card-bg: rgba(243, 236, 217, 0.035);
+            --card-bg-strong: rgba(243, 236, 217, 0.055);
+            --card-border: rgba(201, 162, 39, 0.22);
+            --gold: #c9a227;
+            --gold-bright: #f0cf6e;
+            --gold-soft: rgba(201, 162, 39, 0.35);
+            --ivory: #f4eedd;
+            --sage: #9fb3a4;
+            --sage-dim: #6d8378;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Jost', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
+
+        body {
+            background-color: var(--obsidian);
+            background-image:
+                radial-gradient(ellipse 900px 600px at 15% -10%, rgba(201, 162, 39, 0.10), transparent 60%),
+                radial-gradient(ellipse 900px 700px at 90% 15%, rgba(18, 40, 28, 0.9), transparent 55%),
+                radial-gradient(ellipse 1000px 800px at 50% 100%, rgba(201, 162, 39, 0.06), transparent 60%);
+            color: var(--ivory);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Film-grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.035;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        ::selection { background: var(--gold); color: var(--obsidian); }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 1.5px solid var(--gold-bright);
+            outline-offset: 3px;
+        }
+
+        /* Fixed ornamental frame */
+        .frame {
+            position: fixed;
+            inset: 10px;
+            z-index: 900;
+            pointer-events: none;
+            border: 1px solid rgba(201, 162, 39, 0.18);
+        }
+        .frame .corner {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border: 1.5px solid var(--gold);
+            opacity: 0.75;
+        }
+        .frame .corner.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .frame .corner.tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+        .frame .corner.bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+        .frame .corner.br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+        /* Scroll progress ribbon */
+        .progress-ribbon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+            z-index: 1200;
+            box-shadow: 0 0 10px rgba(240, 207, 110, 0.6);
+            transition: width 0.1s linear;
+        }
+
+        /* Ambient floating embers */
+        .ember {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--gold-bright);
+            box-shadow: 0 0 8px 2px rgba(240, 207, 110, 0.5);
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            animation: drift 14s linear infinite;
+        }
+        @keyframes drift {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            8% { opacity: 0.7; }
+            92% { opacity: 0.5; }
+            100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.1rem 2.2rem;
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            backdrop-filter: blur(0px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease, padding 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(7, 16, 11, 0.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 0.85rem 2.2rem;
+        }
+
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--ivory);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+        }
+        .logo-ring {
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-bright);
+            font-size: 0.85rem;
+            position: relative;
+        }
+        .logo-ring::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 50%;
+            animation: spin-slow 18s linear infinite;
+        }
+        @keyframes spin-slow { to { transform: rotate(360deg); } }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+            width: 30px;
+        }
+        .hamburger span {
+            width: 100%;
+            height: 1px;
+            background-color: var(--gold-bright);
+            transition: all 0.35s cubic-bezier(.65,0,.35,1);
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .nav-links {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            max-width: 85vw;
+            height: 100vh;
+            background: linear-gradient(160deg, rgba(13, 30, 21, 0.98), rgba(7, 16, 11, 0.99));
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1.6rem;
+            padding-left: 3rem;
+            transition: right 0.5s cubic-bezier(.65,0,.35,1);
+            box-shadow: -20px 0 50px rgba(0,0,0,0.55);
+            border-left: 1px solid var(--card-border);
+        }
+        .nav-links.active { right: 0; }
+
+        .nav-links a {
+            position: relative;
+            color: var(--ivory);
+            text-decoration: none;
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+            padding-left: 0;
+        }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: -1.4rem;
+            top: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--gold-bright);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--gold-bright); padding-left: 8px; }
+        .nav-links a:hover::before { width: 24px; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 8rem 1.5rem 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4.5rem 1.5rem 3.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 4px;
+            backdrop-filter: blur(18px);
+            margin-bottom: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.45), inset 0 0 60px rgba(201, 162, 39, 0.03);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .hero:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.55), inset 0 0 80px rgba(201, 162, 39, 0.06);
+        }
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border: 1px solid var(--gold-soft);
+            opacity: 0.5;
+            transition: border-color 0.4s ease, opacity 0.4s ease;
+        }
+        .hero:hover::before, .hero:hover::after {
+            border-color: var(--gold-bright);
+            opacity: 0.85;
+        }
+        .hero::before { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+        .hero::after { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+        .hero-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 22rem;
+            color: rgba(201, 162, 39, 0.035);
+            z-index: 0;
+            animation: spin-slow 120s linear infinite;
+            pointer-events: none;
+        }
+
+        .tagline {
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gold-bright);
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Fraunces', serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: italic;
+            font-size: clamp(2.4rem, 6vw, 4.4rem);
+            margin-bottom: 1.2rem;
+            line-height: 1.15;
+            background: linear-gradient(180deg, var(--ivory) 40%, var(--gold-bright) 130%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-sub {
+            color: var(--sage);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Ribbon unfurl */
+        .ribbon-unfurl {
+            display: block;
+            width: 220px;
+            height: 18px;
+            margin: 1.8rem auto 0;
+            position: relative;
+            z-index: 1;
+        }
+        .ribbon-unfurl path {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1.4;
+            stroke-linecap: round;
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            animation: draw-ribbon 1.8s 0.4s cubic-bezier(.65,0,.35,1) forwards;
+        }
+        @keyframes draw-ribbon { to { stroke-dashoffset: 0; } }
+
+        /* Scratch Card Section */
+        .scratch-container {
+            margin: 2.6rem auto 0;
+            max-width: 380px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scratch-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            color: var(--sage);
+            margin-bottom: 12px;
+        }
+
+        .scratch-card-wrapper {
+            position: relative;
+            width: 100%;
+            height: 116px;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.55);
+            border: 1px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .scratch-card-wrapper:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 45px rgba(201, 162, 39, 0.25);
+        }
+        .scratch-card-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            border: 1px dashed rgba(244, 238, 221, 0.25);
+            z-index: 3;
+            pointer-events: none;
+            border-radius: 3px;
+        }
+
+        .scratch-reveal-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(201, 162, 39, 0.12), transparent 60%),
+                linear-gradient(135deg, rgba(18, 40, 28, 0.9), rgba(7, 16, 11, 0.95));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .scratch-reveal-content i {
+            color: var(--gold-bright);
+            font-size: 1.15rem;
+            margin-bottom: 5px;
+        }
+
+        .scratch-reveal-content h3 {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--ivory);
+            font-size: 1.3rem;
+        }
+
+        .scratch-reveal-content p {
+            font-family: 'Space Mono', monospace;
+            color: var(--gold-bright);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        #scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        /* Countdown Timer */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2.6rem;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .timer-box {
+            background: rgba(244, 238, 221, 0.02);
+            border: 1px solid var(--card-border);
+            padding: 1rem 1.3rem 0.85rem;
+            border-radius: 4px;
+            min-width: 78px;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .timer-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background-color: rgba(201, 162, 39, 0.06);
+        }
+        .timer-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 12%;
+            width: 76%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .timer-box .number {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+            text-shadow: 0 0 18px rgba(240, 207, 110, 0.25);
+        }
+
+        .timer-box .label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--sage-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+            text-align: center;
+            margin: 5rem 0 1rem;
+            color: var(--ivory);
+        }
+
+        .ribbon-divider {
+            display: block;
+            width: 130px;
+            height: 14px;
+            margin: 0 auto 3rem;
+        }
+        .ribbon-divider path {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1.2;
+            stroke-linecap: round;
+            stroke-dasharray: 160;
+            stroke-dashoffset: 160;
+            transition: stroke-dashoffset 1.1s cubic-bezier(.65,0,.35,1);
+        }
+        .ribbon-divider.drawn path { stroke-dashoffset: 0; }
+
+        /* Hosts Grid */
+        .hosts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .host-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 4px;
+            padding: 2.2rem 1.6rem;
+            text-align: center;
+            transition: transform 0.45s cubic-bezier(.2,.8,.2,1), border-color 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+        }
+        .host-card::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid transparent;
+            transition: border-color 0.4s ease;
+            pointer-events: none;
+        }
+        .host-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .host-card:hover::before { border-color: rgba(201, 162, 39, 0.25); }
+
+        .host-img-wrap {
+            width: 112px;
+            height: 112px;
+            margin: 0 auto 1.2rem;
+            position: relative;
+        }
+        .host-img-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border: 1px solid var(--gold-soft);
+            border-radius: 50%;
+            transition: border-color 0.4s ease, transform 0.4s ease;
+        }
+        .host-card:hover .host-img-wrap::before {
+            border-color: var(--gold-bright);
+            transform: scale(1.08);
+        }
+        .host-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: grayscale(35%) contrast(1.05);
+            border: 1px solid var(--gold);
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
+        .host-card:hover .host-img {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        .host-card h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+        }
+        .host-role {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+        }
+
+        /* Schedule Timeline */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, var(--gold-soft) 8%, var(--gold-soft) 92%, transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 0 3rem 3rem;
+            transition: transform 0.35s ease;
+        }
+        .timeline-item:hover {
+            transform: translateX(4px);
+        }
+        .timeline-item:nth-child(odd):hover {
+            transform: translateX(-4px);
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold-bright);
+            box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.15), 0 0 14px var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .timeline-item:hover::before {
+            transform: scale(1.4);
+            box-shadow: 0 0 0 6px rgba(201, 162, 39, 0.25), 0 0 20px var(--gold-bright);
+        }
+        .timeline-item:nth-child(odd)::before { right: -5px; }
+        .timeline-item:nth-child(even)::before { left: -5px; }
+
+        .timeline-time {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            color: var(--gold-bright);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .timeline-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 1.25rem;
+            margin: 0.35rem 0 0.5rem;
+        }
+        .timeline-desc { color: var(--sage); font-size: 0.9rem; font-weight: 300; line-height: 1.6; }
+
+        @media (max-width: 720px) {
+            .timeline::before { left: 6px; }
+            .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+                width: 100%;
+                left: 0;
+                text-align: left;
+                padding: 0 0 2.6rem 2.4rem;
+            }
+            .timeline-item:hover, .timeline-item:nth-child(odd):hover {
+                transform: translateX(4px);
+            }
+            .timeline-item:nth-child(odd)::before, .timeline-item:nth-child(even)::before {
+                left: 1px; right: auto;
+            }
+        }
+
+        /* Filterable Multi-Media Gallery */
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2.4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--sage);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.35s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--obsidian);
+            font-weight: 700;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 162, 39, 0.25);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.4rem;
+        }
+
+        .gallery-card {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 230px;
+            border: 1px solid var(--card-border);
+            background: #000;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .gallery-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        .gallery-card img, .gallery-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(.2,.8,.2,1), filter 0.5s ease;
+            filter: saturate(0.85) brightness(0.92);
+        }
+
+        .gallery-card:hover img, .gallery-card:hover video {
+            transform: scale(1.08);
+            filter: saturate(1) brightness(1);
+        }
+
+        .gallery-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(7,16,11,0.85) 100%);
+            pointer-events: none;
+        }
+
+        .media-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(7, 16, 11, 0.65);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--gold-soft);
+            color: var(--gold-bright);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 2;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .gallery-card:hover .media-badge {
+            border-color: var(--gold-bright);
+            background: rgba(7, 16, 11, 0.85);
+        }
+
+        /* RSVP Form Section */
+        .rsvp-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            backdrop-filter: blur(14px);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .rsvp-section:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        .rsvp-section::before, .rsvp-section::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--gold-soft);
+            transition: border-color 0.4s ease;
+        }
+        .rsvp-section:hover::before, .rsvp-section:hover::after {
+            border-color: var(--gold-bright);
+        }
+        .rsvp-section::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .rsvp-section::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+        .form-group {
+            margin-bottom: 1.9rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 0.2rem;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--card-border);
+            border-radius: 0;
+            color: var(--ivory);
+            font-family: 'Jost', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.35s ease;
+        }
+        textarea.form-control { resize: vertical; }
+
+        .form-control::placeholder { color: var(--sage-dim); }
+
+        .form-control:focus {
+            border-bottom-color: var(--gold-bright);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            padding: 0.55rem 1.1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            transition: border-color 0.3s ease, background 0.3s ease, transform 0.2s ease;
+        }
+        .radio-label:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold-soft);
+        }
+        .radio-label:has(input:checked) {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.08);
+        }
+
+        .radio-label input[type="radio"] {
+            accent-color: var(--gold);
+            width: 15px;
+            height: 15px;
+        }
+
+        /* Plus / Minus Guest Counter */
+        .counter-control {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 0.4rem;
+            background: rgba(244, 238, 221, 0.02);
+            border: 1px solid var(--card-border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            transition: border-color 0.3s ease;
+        }
+        .counter-control:hover {
+            border-color: var(--gold);
+        }
+
+        .counter-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--gold-bright);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .counter-btn:hover:not(:disabled) {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--obsidian);
+            transform: scale(1.1);
+        }
+        .counter-btn:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+            border-color: transparent;
+        }
+
+        .counter-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--ivory);
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.05rem;
+            background: linear-gradient(120deg, var(--gold) 0%, var(--gold-bright) 50%, var(--gold) 100%);
+            background-size: 220% 100%;
+            color: var(--obsidian);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(201, 162, 39, 0.3);
+            background-position: 100% 0;
+        }
+
+        /* Map & Location Section */
+        .location-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .map-card, .info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 4px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .map-card:hover, .info-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-heading {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--gold-bright);
+            margin-bottom: 0.6rem;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-text { color: var(--sage); font-size: 0.9rem; font-weight: 300; }
+
+        .map-wrapper {
+            width: 100%;
+            height: 250px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            margin-top: 1.1rem;
+            filter: grayscale(45%) contrast(1.1) brightness(0.9);
+            transition: filter 0.4s ease;
+        }
+
+        .map-card:hover .map-wrapper {
+            filter: grayscale(0%) contrast(1) brightness(1);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.1rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .info-item i {
+            font-size: 1.05rem;
+            color: var(--gold-bright);
+            margin-top: 4px;
+            width: 20px;
+            transition: transform 0.3s ease;
+        }
+        .info-item:hover i {
+            transform: scale(1.2);
+        }
+        .info-item strong { font-family: 'Space Mono', monospace; font-size: 0.78rem; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 400; color: var(--ivory); }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.6rem;
+        }
+
+        .btn-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.85rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-size: 0.88rem;
+            border: 1px solid transparent;
+        }
+
+        .btn-wa { background-color: rgba(37, 211, 102, 0.12); border-color: rgba(37, 211, 102, 0.4); color: #4fdc85; }
+        .btn-wa:hover { background-color: #25D366; color: #08150e; box-shadow: 0 0 20px rgba(37, 211, 102, 0.35); transform: translateY(-2px); }
+
+        .btn-insta { background: rgba(220, 39, 103, 0.1); border-color: rgba(220, 39, 103, 0.4); color: #e07ba0; }
+        .btn-insta:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; box-shadow: 0 0 20px rgba(220, 39, 67, 0.35); transform: translateY(-2px); }
+
+        /* Toast Popup */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--forest-deep);
+            border: 1px solid var(--gold);
+            color: var(--gold-bright);
+            padding: 1rem 1.6rem;
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.82rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 2000;
+            animation: slideUp 0.35s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3.5rem 0 2rem;
+            color: var(--sage-dim);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            border-top: 1px solid var(--card-border);
+            margin-top: 4.5rem;
+        }
+        footer .flourish { margin-bottom: 1.2rem; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container { padding-top: 6.5rem; }
+            .hero { padding: 3rem 1.2rem; }
+            .timer-container { gap: 0.7rem; }
+            .timer-box { min-width: 62px; padding: 0.7rem 0.7rem 0.6rem; }
+            .timer-box .number { font-size: 1.25rem; }
+            .rsvp-section { padding: 2.2rem 1.4rem; }
+            .hero-watermark { font-size: 14rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="frame">
+        <span class="corner tl"></span>
+        <span class="corner tr"></span>
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+    </div>
+    <div class="progress-ribbon" id="progress-ribbon"></div>
+
+    <!-- Navigation Header -->
+    <nav id="site-nav">
+        <div class="logo">
+            <span class="logo-ring"><i class="fa-solid fa-crown"></i></span>
+            AURA EVENTS
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#hosts" onclick="toggleMenu()">Hosts</a>
+            <a href="#schedule" onclick="toggleMenu()">Schedule</a>
+            <a href="#gallery" onclick="toggleMenu()">Past Events</a>
+            <a href="#rsvp" onclick="toggleMenu()">RSVP</a>
+            <a href="#location" onclick="toggleMenu()">Location</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Hero Section -->
+        <section class="hero" id="home" data-aos="zoom-in" data-aos-duration="1000">
+            <i class="fa-solid fa-crown hero-watermark"></i>
+            <p class="tagline">Cordially Invites You To The</p>
+            <h1>Grand Office Opening Ceremony</h1>
+            <p class="hero-sub">
+                Join us as we launch our new creative workspace and celebrate crafting extraordinary event experiences.
+            </p>
+
+            <svg class="ribbon-unfurl" viewBox="0 0 220 18" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 9 Q60 -4 110 9 T216 9" />
+            </svg>
+
+            <!-- Scratch Card Date Reveal -->
+            <div class="scratch-container">
+                <p class="scratch-title"><i class="fa-solid fa-hand-sparkles"></i> Scratch below to reveal the date!</p>
+                <div class="scratch-card-wrapper">
+                    <div class="scratch-reveal-content">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <h3>Saturday, October 24, 2026</h3>
+                        <p>10:00 AM IST Onwards</p>
+                    </div>
+                    <canvas id="scratch-canvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="timer-container">
+                <div class="timer-box">
+                    <div class="number" id="days">00</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="timer-box">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="timer-box">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Mins</div>
+                </div>
+                <div class="timer-box">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Secs</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hosts Section -->
+        <h2 class="section-title" id="hosts" data-aos="fade-up">Hosted By</h2>
+        <svg class="ribbon-divider" viewBox="0 0 130 14" data-aos="fade-up"><path d="M2 7 Q65 -6 128 7" /></svg>
+        <div class="hosts-grid" data-aos="fade-up">
+            <div class="host-card">
+                <div class="host-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=250" alt="Host" class="host-img">
+                </div>
+                <h3>Alexander Wright</h3>
+                <p class="host-role">Founder &amp; CEO</p>
+            </div>
+            <div class="host-card">
+                <div class="host-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=250" alt="Host" class="host-img">
+                </div>
+                <h3>Sophia Chen</h3>
+                <p class="host-role">Creative Director</p>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+        <h2 class="section-title" id="schedule" data-aos="fade-up">Opening Schedule</h2>
+        <svg class="ribbon-divider" viewBox="0 0 130 14" data-aos="fade-up"><path d="M2 7 Q65 -6 128 7" /></svg>
+        <div class="timeline" data-aos="fade-up">
+            <div class="timeline-item">
+                <div class="timeline-time">10:00 AM</div>
+                <div class="timeline-title">Grand Welcome &amp; Red Carpet</div>
+                <p class="timeline-desc">Welcome drinks, red carpet photo op, and live acoustic music.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">10:45 AM</div>
+                <div class="timeline-title">Ribbon Cutting &amp; Inauguration</div>
+                <p class="timeline-desc">Official ribbon cutting ceremony followed by confetti celebrations.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">11:30 AM</div>
+                <div class="timeline-title">Office Experience Tour</div>
+                <p class="timeline-desc">Walkthrough of our design studio, VR event demo, and past works showcase.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">12:30 PM</div>
+                <div class="timeline-title">Gourmet Brunch &amp; Toast</div>
+                <p class="timeline-desc">High tea, gourmet food stalls, and networking toast with the founders.</p>
+            </div>
+        </div>
+
+        <!-- Dynamic Past Events Gallery -->
+        <h2 class="section-title" id="gallery" data-aos="fade-up">Past Event Showcase</h2>
+        <svg class="ribbon-divider" viewBox="0 0 130 14" data-aos="fade-up"><path d="M2 7 Q65 -6 128 7" /></svg>
+
+        <div class="gallery-filter" data-aos="fade-up">
+            <button class="filter-btn active" onclick="filterGallery('all')">All Media</button>
+            <button class="filter-btn" onclick="filterGallery('photo')">Photos</button>
+            <button class="filter-btn" onclick="filterGallery('video')">Videos</button>
+        </div>
+
+        <div class="gallery-grid" data-aos="fade-up">
+            <!-- Photos -->
+            <div class="gallery-card media-photo">
+                <span class="media-badge"><i class="fa-regular fa-image"></i> Photo</span>
+                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=600" alt="Gala Event">
+            </div>
+            <div class="gallery-card media-photo">
+                <span class="media-badge"><i class="fa-regular fa-image"></i> Photo</span>
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=600" alt="Concert Stage">
+            </div>
+            <div class="gallery-card media-photo">
+                <span class="media-badge"><i class="fa-regular fa-image"></i> Photo</span>
+                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=600" alt="Wedding Setup">
+            </div>
+
+            <!-- Videos -->
+            <div class="gallery-card media-video">
+                <span class="media-badge"><i class="fa-solid fa-video"></i> Video</span>
+                <video autoplay loop muted playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-lights-in-a-night-club-4330-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-card media-video">
+                <span class="media-badge"><i class="fa-solid fa-video"></i> Video</span>
+                <video autoplay loop muted playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-people-dancing-at-a-party-40822-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-card media-photo">
+                <span class="media-badge"><i class="fa-regular fa-image"></i> Photo</span>
+                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=600" alt="Celebration Decor">
+            </div>
+        </div>
+
+        <!-- RSVP Form Section -->
+        <h2 class="section-title" id="rsvp" data-aos="fade-up">RSVP Confirmation</h2>
+        <svg class="ribbon-divider" viewBox="0 0 130 14" data-aos="fade-up"><path d="M2 7 Q65 -6 128 7" /></svg>
+        <div class="rsvp-section" data-aos="fade-up">
+            <form id="rsvp-form" onsubmit="handleRSVP(event)">
+                <div class="form-group">
+                    <label for="guest-name"><i class="fa-regular fa-user"></i> Full Name *</label>
+                    <input type="text" id="guest-name" class="form-control" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-regular fa-circle-question"></i> Will you be attending? *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="attending" value="Yes, I will be there" checked>
+                            Yes, absolutely!
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="attending" value="Sorry, I cannot make it">
+                            Regretfully No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user-group"></i> Total Number of Guests *</label>
+                    <div class="counter-control">
+                        <button type="button" class="counter-btn" id="btn-decrement" onclick="updateGuestCount(-1)" disabled><i class="fa-solid fa-minus"></i></button>
+                        <span class="counter-value" id="counter-display">1</span>
+                        <button type="button" class="counter-btn" id="btn-increment" onclick="updateGuestCount(1)"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest-query"><i class="fa-regular fa-comment-dots"></i> Any Special Requirements / Queries</label>
+                    <textarea id="guest-query" class="form-control" rows="3" placeholder="Dietary preferences, accessibility needs, or message for the hosts..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fa-solid fa-paper-plane"></i> Submit RSVP via WhatsApp
+                </button>
+            </form>
+        </div>
+
+        <!-- Address & Google Map Section -->
+        <h2 class="section-title" id="location" data-aos="fade-up">Location &amp; Contact</h2>
+        <svg class="ribbon-divider" viewBox="0 0 130 14" data-aos="fade-up"><path d="M2 7 Q65 -6 128 7" /></svg>
+        <div class="location-container" data-aos="fade-up">
+            <div class="map-card">
+                <h3 class="card-heading"><i class="fa-solid fa-map-location-dot"></i> Venue Location</h3>
+                <p class="card-text">
+                    Suite 402, Signature Towers, BKC, Mumbai, Maharashtra 400051
+                </p>
+                <div class="map-wrapper">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.7925828458145!2d72.86873527584108!3d19.06180715274987!2m3!1f02!0f0!0f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8e2f831b81d%3A0xe67db509a25b30b4!2sBandra%20Kurla%20Complex!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3 class="card-heading"><i class="fa-solid fa-address-book"></i> Direct Contact</h3>
+
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <strong>Phone / WhatsApp</strong>
+                        <p class="card-text">+91 98765 43210</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <strong>Email Address</strong>
+                        <p class="card-text">contact@auraevents.com</p>
+                    </div>
+                </div>
+
+                <div class="social-buttons">
+                    <a href="https://wa.me/919876543210" target="_blank" class="btn-social btn-wa">
+                        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="btn-social btn-insta">
+                        <i class="fa-brands fa-instagram"></i> Follow on Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="flourish"><span class="line"></span><i class="fa-solid fa-crown"></i><span class="line right"></span></div>
+            <p>© 2026 Aura Event Management. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- Toast Popup Notification -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-check"></i> Redirecting to WhatsApp...
+    </div>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animations
+        AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
+
+        function id(name) { return document.getElementById(name); }
+
+        // Hamburger Menu Toggle
+        const hamburger = id('hamburger');
+        const navLinks = id('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        function toggleMenu() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+
+        // Nav background on scroll + scroll progress ribbon
+        const siteNav = id('site-nav');
+        const progressRibbon = id('progress-ribbon');
+        window.addEventListener('scroll', () => {
+            siteNav.classList.toggle('scrolled', window.scrollY > 40);
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressRibbon.style.width = pct + '%';
+        });
+
+        // Ribbon divider draw-in on scroll into view
+        const ribbonObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('drawn');
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('.ribbon-divider').forEach(el => ribbonObserver.observe(el));
+
+        // Ambient floating embers
+        const emberCount = window.innerWidth < 640 ? 8 : 16;
+        for (let i = 0; i < emberCount; i++) {
+            const ember = document.createElement('div');
+            ember.className = 'ember';
+            ember.style.left = Math.random() * 100 + 'vw';
+            ember.style.bottom = '-10px';
+            ember.style.animationDuration = (10 + Math.random() * 10) + 's';
+            ember.style.animationDelay = (Math.random() * 14) + 's';
+            document.body.appendChild(ember);
+        }
+
+        // Scratch Canvas Implementation
+        const canvas = id('scratch-canvas');
+        const ctx = canvas.getContext('2d');
+        let isScratched = false;
+
+        function initScratchCard() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            // Gold foil surface with subtle sheen
+            const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            grad.addColorStop(0, '#8a6c14');
+            grad.addColorStop(0.45, '#e0b93a');
+            grad.addColorStop(0.55, '#c9a227');
+            grad.addColorStop(1, '#8a6c14');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Overlay text on canvas top
+            ctx.fillStyle = 'rgba(7, 16, 11, 0.85)';
+            ctx.font = '600 14px "Space Mono", monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText('✦ SCRATCH TO REVEAL ✦', canvas.width / 2, canvas.height / 2 + 5);
+        }
+
+        window.addEventListener('load', initScratchCard);
+        window.addEventListener('resize', initScratchCard);
+
+        let isDrawing = false;
+
+        function scratch(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 22, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Fire confetti once sufficiently scratched
+            if (!isScratched) {
+                checkScratchPercent();
+            }
+        }
+
+        function checkScratchPercent() {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let transparentPixels = 0;
+            for (let i = 3; i < imageData.data.length; i += 4) {
+                if (imageData.data[i] === 0) transparentPixels++;
+            }
+            if (transparentPixels / (imageData.data.length / 4) > 0.4) {
+                isScratched = true;
+                triggerConfetti();
+            }
+        }
+
+        canvas.addEventListener('mousedown', () => isDrawing = true);
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mousemove', scratch);
+
+        canvas.addEventListener('touchstart', () => isDrawing = true);
+        canvas.addEventListener('touchend', () => isDrawing = false);
+        canvas.addEventListener('touchmove', scratch);
+
+        // Confetti Generator (gold & ivory palette)
+        function triggerConfetti() {
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#c9a227', '#f0cf6e', '#f4eedd', '#12281c']
+            });
+        }
+
+        // Countdown Timer Logic
+        const eventDate = new Date('October 24, 2026 10:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                id('days').innerText = days < 10 ? '0' + days : days;
+                id('hours').innerText = hours < 10 ? '0' + hours : hours;
+                id('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+                id('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Gallery Filter Logic
+        function filterGallery(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const photos = document.querySelectorAll('.media-photo');
+            const videos = document.querySelectorAll('.media-video');
+
+            if (category === 'all') {
+                photos.forEach(el => el.style.display = 'block');
+                videos.forEach(el => el.style.display = 'block');
+            } else if (category === 'photo') {
+                photos.forEach(el => el.style.display = 'block');
+                videos.forEach(el => el.style.display = 'none');
+            } else if (category === 'video') {
+                photos.forEach(el => el.style.display = 'none');
+                videos.forEach(el => el.style.display = 'block');
+            }
+        }
+
+        // Guest Counter Logic (Min 1, Max 10)
+        let guestCount = 1;
+        function updateGuestCount(change) {
+            guestCount = Math.max(1, Math.min(10, guestCount + change));
+            id('counter-display').innerText = guestCount;
+            id('btn-decrement').disabled = guestCount === 1;
+            id('btn-increment').disabled = guestCount === 10;
+        }
+
+        // RSVP WhatsApp Form Handler
+        function handleRSVP(e) {
+            e.preventDefault();
+
+            const name = id('guest-name').value;
+            const attending = document.querySelector('input[name="attending"]:checked').value;
+            const count = guestCount + (guestCount === 1 ? ' Person' : ' Persons');
+            const query = id('guest-query').value;
+
+            let text = `*New RSVP Response!*%0A%0A`;
+            text += `*Name:* ${encodeURIComponent(name)}%0A`;
+            text += `*Status:* ${encodeURIComponent(attending)}%0A`;
+            text += `*Guest Count:* ${encodeURIComponent(count)}%0A`;
+            if (query.trim() !== "") {
+                text += `*Query/Notes:* ${encodeURIComponent(query)}%0A`;
+            }
+
+            id('toast').style.display = 'block';
+            triggerConfetti();
+
+            setTimeout(() => {
+                window.open(`https://wa.me/919876543210?text=${text}`, '_blank');
+                id('toast').style.display = 'none';
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

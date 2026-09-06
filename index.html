@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>श्रीफळ इव्हेंट मॅनेजमेंट - नवीन कार्यालय उद्घाटन सोहळा</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800&family=Rozha+One&family=Yatra+One&family=Marcellus&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --gold-shimmer: linear-gradient(120deg, #d4af37 0%, #fff6cc 25%, #aa771c 50%, #fff2b2 75%, #8b6508 100%);
+            --gold-metallic: linear-gradient(135deg, #e5c07b 0%, #c4973b 50%, #8a6417 100%);
+            --royal-velvet: #130005;
+            --royal-burgundy: #2b020a;
+            --crimson-dark: #3f0410;
+            --gold-border: rgba(229, 192, 123, 0.45);
+            --gold-glow: 0 0 25px rgba(212, 175, 55, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Serif Devanagari', 'Marcellus', serif;
+            background: radial-gradient(circle at 50% 20%, #30020c 0%, #150005 60%, #080002 100%);
+            color: #fcefdc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Canvas for Gold Embers */
+        #ambientCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* --- METALLIC TEXT & TYPOGRAPHY --- */
+        .gold-metallic-text {
+            background: var(--gold-shimmer);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineGold 4s linear infinite;
+        }
+
+        @keyframes shineGold {
+            to { background-position: 250% center; }
+        }
+
+        .royal-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px auto;
+            max-width: 380px;
+        }
+
+        .royal-divider::before, .royal-divider::after {
+            content: '';
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .royal-divider i {
+            color: #d4af37;
+            font-size: 1.1rem;
+        }
+
+        /* --- LUXURY GLASSMORPHISM CARDS --- */
+        .royal-card {
+            background: linear-gradient(135deg, rgba(43, 2, 10, 0.72) 0%, rgba(19, 0, 5, 0.82) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--gold-border);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 1px rgba(246, 216, 140, 0.3);
+            position: relative;
+            margin-bottom: 35px;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .royal-card:hover {
+            border-color: rgba(246, 216, 140, 0.85);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8), var(--gold-glow);
+        }
+
+        .royal-card::before, .royal-card::after {
+            content: '❧';
+            position: absolute;
+            font-size: 1.5rem;
+            color: #d4af37;
+            opacity: 0.6;
+            line-height: 1;
+        }
+        .royal-card::before { top: 12px; left: 16px; }
+        .royal-card::after { bottom: 12px; right: 16px; transform: rotate(180deg); }
+
+        /* --- HEADER & HERO --- */
+        header {
+            text-align: center;
+            padding: 60px 20px 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-frame {
+            width: 190px;
+            height: 190px;
+            margin: 0 auto 25px;
+            position: relative;
+            border-radius: 50%;
+            padding: 6px;
+            background: var(--gold-shimmer);
+            box-shadow: 0 0 45px rgba(212, 175, 55, 0.5), inset 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        .logo-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #fffdf8;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .sub-tag {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 4px;
+            color: #d4af37;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .main-heading {
+            font-family: 'Rozha One', 'Cinzel Decorative', serif;
+            font-size: clamp(2.3rem, 5vw, 4rem);
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin: 0 auto;
+            color: #e5cdb0;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        /* --- COUNTDOWN --- */
+        .countdown-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin: 30px auto 10px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-gem {
+            background: radial-gradient(circle at top, rgba(84, 9, 24, 0.8), rgba(20, 0, 5, 0.95));
+            border: 1px solid #d4af37;
+            border-radius: 12px;
+            padding: 12px 18px;
+            min-width: 80px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.7), inset 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .countdown-gem span {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .countdown-gem label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #c9ab7b;
+            text-transform: uppercase;
+        }
+
+        /* --- CONTENT WRAPPER --- */
+        .wrapper {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 0 20px 70px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- SECTION HEADERS --- */
+        .section-headline {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .section-headline h2 {
+            font-family: 'Rozha One', serif;
+            font-size: 1.65rem;
+            color: #f7e6c4;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        /* Relocation Announcement */
+        .announcement-box {
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #f5dfc3;
+            padding: 15px 20px;
+        }
+
+        /* --- 2-COL DETAILS & TIMELINE --- */
+        .luxury-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .detail-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4d0013, #150005);
+            border: 1px solid #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4af37;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Timetable Stepper */
+        .stepper {
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .stepper::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: linear-gradient(180deg, #d4af37, #4d0013);
+        }
+
+        .step-item {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .step-item::after {
+            content: '⬥';
+            position: absolute;
+            left: -26px;
+            top: -2px;
+            color: #d4af37;
+            font-size: 1rem;
+            background: #2b020a;
+            padding: 2px 0;
+        }
+
+        .step-time {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .step-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff4e0;
+        }
+
+        /* --- 3 HOSTS GRID CONFIGURATION --- */
+        .hosts-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .host-card {
+            text-align: center;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .host-portrait {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            padding: 4px;
+            background: var(--gold-shimmer);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+
+        .host-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            transition: transform 0.6s ease;
+        }
+
+        /* Specific alignment for Aditya Chaudhari's photo */
+        .host-portrait.align-top img {
+            object-position: top center;
+        }
+
+        .host-card:hover .host-portrait img {
+            transform: scale(1.1);
+        }
+
+        .host-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff3db;
+            margin-bottom: 5px;
+        }
+
+        .host-title {
+            color: #cbb28b;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- SHOWCASE TILES --- */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .showcase-tile {
+            position: relative;
+            height: 230px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--gold-border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+
+        .showcase-tile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .tile-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(15, 0, 4, 0.95) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 18px;
+        }
+
+        .tile-gradient h4 {
+            color: #f7e6c4;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-tile:hover img {
+            transform: scale(1.12);
+        }
+
+        .showcase-tile:hover .tile-gradient h4 {
+            transform: translateY(-5px);
+            color: #d4af37;
+        }
+
+        /* --- RSVP FORM & CONTROLS --- */
+        .rsvp-container {
+            max-width: 580px;
+            margin: 0 auto 35px;
+        }
+
+        .royal-input-group {
+            margin-bottom: 20px;
+        }
+
+        .royal-input-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #d4af37;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .royal-control {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 10px;
+            background: rgba(15, 0, 4, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .royal-control:focus {
+            outline: none;
+            border-color: #f6d88c;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            background: rgba(25, 0, 7, 0.95);
+        }
+
+        .btn-royal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 30px;
+            background: var(--gold-shimmer);
+            background-size: 200% auto;
+            color: #200007;
+            font-family: 'Cinzel', 'Noto Serif Devanagari', serif;
+            font-weight: 800;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .btn-royal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.7);
+            background-position: right center;
+        }
+
+        /* --- PIXELSSURPRISE PARTNER BADGE --- */
+        .partner-card {
+            text-align: center;
+            padding: 22px 20px;
+            background: linear-gradient(135deg, rgba(20, 0, 5, 0.85), rgba(45, 3, 12, 0.85));
+            border: 1px dashed var(--gold-border);
+            border-radius: 14px;
+            margin-top: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-3px);
+            border-color: #f6d88c;
+        }
+
+        .partner-card p {
+            font-size: 0.85rem;
+            color: #d1b899;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .partner-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .partner-tag span {
+            background: var(--gold-shimmer);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .partner-tag i.fa-instagram {
+            color: #e1306c;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            border-top: 1px solid var(--gold-border);
+            background: #090003;
+            padding: 45px 20px 30px;
+            text-align: center;
+            color: #a8947f;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-contacts {
+            margin: 18px 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contacts a {
+            color: #f7e6c4;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-contacts a:hover {
+            color: #d4af37;
+        }
+
+        @media(max-width: 600px) {
+            .royal-card {
+                padding: 25px 18px;
+            }
+            .section-headline h2 {
+                font-size: 1.4rem;
+            }
+            .main-heading {
+                font-size: 2.1rem;
+            }
+            .countdown-gem {
+                padding: 10px 14px;
+                min-width: 65px;
+            }
+            .countdown-gem span {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="ambientCanvas"></canvas>
+
+    <header>
+        <div class="logo-frame">
+            <img src="logo.jpeg" alt="श्रीफळ इव्हेंट्स मानचिन्ह">
+        </div>
+        <div class="sub-tag">|| श्री गणेशाय नमः ||</div>
+        <h1 class="main-heading gold-metallic-text">श्रीफळ इव्हेंट मॅनेजमेंट</h1>
+        <p class="hero-desc">
+            आपला स्नेह आणि विश्वासाच्या बळावर, स्वप्नांना नवे पंख देत आम्ही पदार्पण करत आहोत आमच्या स्वतःच्या हक्काच्या भव्य, सुसज्ज अशा नवीन कार्यालयात!
+        </p>
+
+        <div class="royal-divider">
+            <i class="fas fa-star-of-life"></i>
+        </div>
+
+        <div class="countdown-wrap">
+            <div class="countdown-gem">
+                <span id="days" class="gold-metallic-text">00</span>
+                <label>दिवस</label>
+            </div>
+            <div class="countdown-gem">
+                <span id="hours" class="gold-metallic-text">00</span>
+                <label>तास</label>
+            </div>
+            <div class="countdown-gem">
+                <span id="minutes" class="gold-metallic-text">00</span>
+                <label>मिनिटे</label>
+            </div>
+            <div class="countdown-gem">
+                <span id="seconds" class="gold-metallic-text">00</span>
+                <label>सेकंद</label>
+            </div>
+        </div>
+    </header>
+
+    <main class="wrapper">
+
+        <section class="royal-card">
+            <div class="announcement-box">
+                <p>
+                    दीर्घ काळ जुन्या कार्यालयातून आपल्या सोहळ्यांना अविस्मरणीय रंग दिल्यानंतर, आपल्या अखंड विश्वासामुळे आता <strong>श्रीफळ इव्हेंट मॅनेजमेंट</strong> एका प्रशस्त आणि आधुनिक तंत्रज्ञानाने सुसज्ज अशा <strong>स्वतःच्या नवीन कार्यालयामध्ये</strong> स्थलांतरित होत आहे.
+                </p>
+                <p style="color: #d4af37; font-weight: 700; margin-top: 8px;">
+                    या मंगलप्रसंगी आपले सहकुटुंब शुभाशीर्वाद आम्हास लाभावेत, हीच नम्र अपेक्षा!
+                </p>
+            </div>
+        </section>
+
+        <div class="luxury-grid-2">
+            <section class="royal-card">
+                <div class="section-headline">
+                    <h2>तारीख आणि स्थळ</h2>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-calendar-star"></i></div>
+                    <div>
+                        <div class="step-time">शुभ मुहूर्त दिनांक</div>
+                        <p style="font-size: 1.15rem; font-weight: 700; color: #fff;">गुरुवार , १७ सप्टेंबर २०२६</p>
+                        <p style="color: #c9ab7b; font-size: 0.95rem;">सकाळी ठिक १०:०० वाजता</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-landmark-dome"></i></div>
+                    <div>
+                        <div class="step-time">नवीन कार्यालयाचा पत्ता</div>
+                        <p style="color: #fff; font-size: 1.05rem; line-height: 1.6;">
+                            "श्रीफळ हाइट्स", तिसरा मजला, सूट क्र. ३०१-३०४,<br>
+                            एम. जी. रोड, छत्रपती संभाजीनगर.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 25px;">
+                    <a href="https://maps.google.com" target="_blank" class="btn-royal">
+                        <i class="fas fa-map-location-dot"></i> गुगल मॅप्सवर मार्ग पहा
+                    </a>
+                </div>
+            </section>
+
+            <section class="royal-card">
+                <div class="section-headline">
+                    <h2>सोहळा रूपरेषा</h2>
+                </div>
+
+                <div class="stepper">
+                    <div class="step-item">
+                        <div class="step-time">सकाळी ०८:३० ते १०:००</div>
+                        <div class="step-title">मंगल वास्तुपूजन व सत्यनारायण महापूजा</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-time">सकाळी १०:०० ते १०:४५</div>
+                        <div class="step-title">सुवर्ण फीत कापणे व मंगल दीपप्रज्वलन</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-time">सकाळी १०:४५ ते १२:३०</div>
+                        <div class="step-title">स्नेहीजनांचे स्वागत व मान्यवरांचा सत्कार</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-time">दुपारी १२:३० नंतर</div>
+                        <div class="step-title">शाही स्नेहभोजन व महाप्रसाद</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="section-headline">
+            <h2>स्वागतोत्सुक निमंत्रक</h2>
+        </div>
+        <div class="hosts-row">
+            <div class="royal-card host-card">
+                <div class="host-portrait">
+                    <img src="ganesh.jpeg" alt="श्री. गणेश चौधरी">
+                </div>
+                <div class="host-name">श्री. गणेश चौधरी</div>
+                <div class="host-title">संस्थापक व व्यवस्थापकीय संचालक</div>
+            </div>
+
+            <div class="royal-card host-card">
+                <div class="host-portrait">
+                    <img src="namrta.jpeg" alt="सौ. नम्रता चौधरी">
+                </div>
+                <div class="host-name">सौ. नम्रता चौधरी</div>
+                <div class="host-title">सह-संस्थापिका व क्रिएटिव्ह डिरेक्टर</div>
+            </div>
+
+            <div class="royal-card host-card">
+                <div class="host-portrait align-top">
+                    <img src="aditya.jpeg" alt="चिं. आदित्य चौधरी">
+                </div>
+                <div class="host-name">चिं. आदित्य चौधरी</div>
+                <div class="host-title">ऑपरेशन्स व प्रॉडक्शन हेड</div>
+            </div>
+        </div>
+
+        <div class="section-headline">
+            <h2>आमची ऐतिहासिक निर्मिती</h2>
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-tile">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&fit=crop" alt="शाही विवाह">
+                <div class="tile-gradient">
+                    <h4>विवाह</h4>
+                </div>
+            </div>
+            <div class="showcase-tile">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&fit=crop" alt="कॉर्पोरेट इव्हेंट्स">
+                <div class="tile-gradient">
+                    <h4>भव्य बिझनेस कॉन्फरन्स</h4>
+                </div>
+            </div>
+            <div class="showcase-tile">
+                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&fit=crop" alt="सांस्कृतिक महोत्सव">
+                <div class="tile-gradient">
+                    <h4>भव्य संगीत व सांस्कृतिक रजनी</h4>
+                </div>
+            </div>
+            <div class="showcase-tile">
+                <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&fit=crop" alt="थीम पार्टी">
+                <div class="tile-gradient">
+                    <h4>लक्झरी कॉन्सर्ट व थीम्स</h4>
+                </div>
+            </div>
+        </div>
+
+        <section class="royal-card rsvp-container">
+            <div class="section-headline" style="margin-bottom: 15px;">
+                <h2>उपस्थिती नोंदणी (RSVP)</h2>
+            </div>
+            <p style="text-align: center; color: #ecd3b6; margin-bottom: 22px; font-size: 0.95rem;">
+                सोहळ्याच्या नियोजनासाठी कृपया आपली उपस्थिती निश्चित करावी.
+            </p>
+            <form onsubmit="handleRoyalRSVP(event)">
+                <div class="royal-input-group">
+                    <label for="name">आपले नाव</label>
+                    <input type="text" id="name" class="royal-control" placeholder="उदा. सयाजीराव काकडे" required>
+                </div>
+                <div class="royal-input-group">
+                    <label for="mobile">मोबाईल क्रमांक</label>
+                    <input type="tel" id="mobile" class="royal-control" placeholder="उदा. 9876543210" required>
+                </div>
+                <div class="royal-input-group">
+                    <label for="guests">उपस्थित सदस्य संख्या</label>
+                    <select id="guests" class="royal-control">
+                        <option value="१ व्यक्ती">१ व्यक्ती</option>
+                        <option value="२ व्यक्ती">२ व्यक्ती</option>
+                        <option value="सपरिवार (३ किंवा अधिक व्यक्ती)">सपरिवार (३ किंवा अधिक)</option>
+                    </select>
+                </div>
+                <div style="text-align: center; margin-top: 25px;">
+                    <button type="submit" class="btn-royal" style="width: 100%;">
+                        <i class="fas fa-gem"></i> उपस्थिती निश्चित करा
+                    </button>
+                </div>
+            </form>
+
+            <a href="https://www.instagram.com/pixels_surprise?stkn=M3B0dzg5dzQxcGls" target="_blank" class="partner-card" title="Follow @pixelssurprise on Instagram">
+                <p>✨ डिजिटल निमंत्रण व संकल्पना भागीदार ✨</p>
+                <div class="partner-tag">
+                    <i class="fab fa-instagram"></i>
+                    <span>pixelssurprise</span>
+                </div>
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <h3 class="gold-metallic-text" style="font-family: 'Rozha One', serif; font-size: 1.8rem; margin-bottom: 8px;">श्रीफळ इव्हेंट मॅनेजमेंट</h3>
+        <p style="color: #c9ab7b; font-size: 0.9rem;">The Art of Royal Celebrations</p>
+        
+        <div class="footer-contacts">
+            <a href="tel:+919503254353"><i class="fas fa-phone-volume"></i> +91 9503254353</a>
+            <a href="mailto:contact@shriphalevents.com"><i class="fas fa-envelope-open-text"></i> contact@shriphalevents.com</a>
+            <a href="https://www.instagram.com/shriphalevents?stkn=MWNtcXdnYnp4OWdqcg==" target="_blank"><i class="fab fa-instagram" style="color: #e1306c;"></i> @shriphalevents</a>
+        </div>
+
+        <p style="font-size: 0.85rem; color: #8c7664; margin-top: 15px;">
+            Crafted with passion by <a href="https://www.instagram.com/pixels_surprise?stkn=M3B0dzg5dzQxcGls" target="_blank" style="color: #f7e6c4; text-decoration: underline; font-weight: 700;">pixelssurprise</a> | © 2026 Shriphal Events. सर्व हक्क सुरक्षित.
+        </p>
+    </footer>
+
+    <script>
+        // 1. Countdown Timer to September 17, 2026
+        const targetDate = new Date('September 17, 2026 10:00:00').getTime();
+
+        function runCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            }
+        }
+        setInterval(runCountdown, 1000);
+        runCountdown();
+
+        // 2. Ambient Embers Particle Engine
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const dustCount = 45;
+
+        class GoldDust {
+            constructor() {
+                this.init();
+            }
+            init() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2.8 + 0.8;
+                this.speedY = -(Math.random() * 0.7 + 0.3);
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.7 + 0.2;
+                this.fadeSpeed = Math.random() * 0.008 + 0.003;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.opacity += this.fadeSpeed;
+
+                if (this.opacity >= 0.9 || this.opacity <= 0.1) {
+                    this.fadeSpeed = -this.fadeSpeed;
+                }
+                if (this.y < -10) {
+                    this.y = height + 10;
+                    this.x = Math.random() * width;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(246, 216, 140, ${this.opacity})`;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#d4af37';
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < dustCount; i++) {
+            particles.push(new GoldDust());
+        }
+
+        function renderEngine() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(renderEngine);
+        }
+        renderEngine();
+
+        // 3. RSVP Handler to WhatsApp Instant Pass
+        function handleRoyalRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const mobile = document.getElementById('mobile').value;
+            const guests = document.getElementById('guests').value;
+
+            const text = `*श्रीफळ इव्हेंट मॅनेजमेंट कार्यालय उद्घाटन सोहळा*%0A%0Aसस्नेह नमस्कार!%0Aमी *${encodeURIComponent(name)}* (मोबाईल: ${encodeURIComponent(mobile)}), नवीन कार्यालय वास्तुशांत व उद्घाटन सोहळ्यास *${encodeURIComponent(guests)}* उपस्थित राहणार आहे.%0A%0A_(Powered by pixelssurprise)_`;
+            
+            window.open(`https://wa.me/919503254353?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -202,7 +202,7 @@
 
         /* --- CONTENT WRAPPER --- */
         .wrapper {
-            max-width: 1050px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px 70px;
             position: relative;
@@ -344,7 +344,6 @@
             transition: transform 0.6s ease;
         }
 
-        /* Specific alignment for Aditya Chaudhari's photo */
         .host-portrait.align-top img {
             object-position: top center;
         }
@@ -366,22 +365,41 @@
             letter-spacing: 1px;
         }
 
-        /* --- SHOWCASE TILES --- */
+        /* --- 5-IMAGE SINGLE ROW GRID CONFIGURATION --- */
         .showcase-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(5, minmax(180px, 1fr));
+            gap: 15px;
             margin-bottom: 35px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: #d4af37 rgba(19, 0, 5, 0.8);
+        }
+
+        .showcase-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .showcase-grid::-webkit-scrollbar-track {
+            background: rgba(19, 0, 5, 0.8);
+            border-radius: 10px;
+        }
+
+        .showcase-grid::-webkit-scrollbar-thumb {
+            background: var(--gold-metallic);
+            border-radius: 10px;
         }
 
         .showcase-tile {
             position: relative;
-            height: 230px;
+            height: 250px;
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--gold-border);
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .showcase-tile img {
@@ -397,14 +415,15 @@
             background: linear-gradient(180deg, transparent 40%, rgba(15, 0, 4, 0.95) 100%);
             display: flex;
             align-items: flex-end;
-            padding: 18px;
+            padding: 14px;
         }
 
         .tile-gradient h4 {
             color: #f7e6c4;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             transition: transform 0.3s ease;
+            line-height: 1.3;
         }
 
         .showcase-tile:hover img {
@@ -414,117 +433,6 @@
         .showcase-tile:hover .tile-gradient h4 {
             transform: translateY(-5px);
             color: #d4af37;
-        }
-
-        /* --- RSVP FORM & CONTROLS --- */
-        .rsvp-container {
-            max-width: 580px;
-            margin: 0 auto 35px;
-        }
-
-        .royal-input-group {
-            margin-bottom: 20px;
-        }
-
-        .royal-input-group label {
-            display: block;
-            font-size: 0.9rem;
-            color: #d4af37;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .royal-control {
-            width: 100%;
-            padding: 13px 16px;
-            border-radius: 10px;
-            background: rgba(15, 0, 4, 0.85);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .royal-control:focus {
-            outline: none;
-            border-color: #f6d88c;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-            background: rgba(25, 0, 7, 0.95);
-        }
-
-        .btn-royal {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 14px 30px;
-            background: var(--gold-shimmer);
-            background-size: 200% auto;
-            color: #200007;
-            font-family: 'Cinzel', 'Noto Serif Devanagari', serif;
-            font-weight: 800;
-            font-size: 1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            text-decoration: none;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
-            transition: all 0.4s ease;
-        }
-
-        .btn-royal:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.7);
-            background-position: right center;
-        }
-
-        /* --- PIXELSSURPRISE PARTNER BADGE --- */
-        .partner-card {
-            text-align: center;
-            padding: 22px 20px;
-            background: linear-gradient(135deg, rgba(20, 0, 5, 0.85), rgba(45, 3, 12, 0.85));
-            border: 1px dashed var(--gold-border);
-            border-radius: 14px;
-            margin-top: 25px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            text-decoration: none;
-            display: block;
-        }
-
-        .partner-card:hover {
-            transform: translateY(-3px);
-            border-color: #f6d88c;
-        }
-
-        .partner-card p {
-            font-size: 0.85rem;
-            color: #d1b899;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .partner-tag {
-            font-family: 'Cinzel', serif;
-            font-size: 1.15rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .partner-tag span {
-            background: var(--gold-shimmer);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .partner-tag i.fa-instagram {
-            color: #e1306c;
-            font-size: 1.1rem;
         }
 
         footer {
@@ -624,7 +532,7 @@
                     दीर्घ काळ जुन्या कार्यालयातून आपल्या सोहळ्यांना अविस्मरणीय रंग दिल्यानंतर, आपल्या अखंड विश्वासामुळे आता <strong>श्रीफळ इव्हेंट मॅनेजमेंट</strong> एका प्रशस्त आणि आधुनिक तंत्रज्ञानाने सुसज्ज अशा <strong>स्वतःच्या नवीन कार्यालयामध्ये</strong> स्थलांतरित होत आहे.
                 </p>
                 <p style="color: #d4af37; font-weight: 700; margin-top: 8px;">
-                    या मंगलप्रसंगी आपले सहकुटुंब शुभाशीर्वाद आम्हास लाभावेत, हीच नम्र अपेक्षा!
+                    या मंगलप्रसंगी आपले सहकुटुंब शुभ आशीर्वाद आम्हास लाभावेत, हीच नम्र अपेक्षा!
                 </p>
             </div>
         </section>
@@ -640,26 +548,26 @@
                     <div>
                         <div class="step-time">शुभ मुहूर्त दिनांक</div>
                         <p style="font-size: 1.15rem; font-weight: 700; color: #fff;">गुरुवार , १७ सप्टेंबर २०२६</p>
-                        <p style="color: #c9ab7b; font-size: 0.95rem;">सकाळी ठिक १०:०० वाजता</p>
+                        <p style="color: #c9ab7b; font-size: 0.95rem;">संध्याकाळी ठीक ६:०० वाजता</p>
                     </div>
                 </div>
 
                 <div class="detail-item">
-                    <div class="detail-icon"><i class="fas fa-landmark-dome"></i></div>
-                    <div>
-                        <div class="step-time">नवीन कार्यालयाचा पत्ता</div>
-                        <p style="color: #fff; font-size: 1.05rem; line-height: 1.6;">
-                            "श्रीफळ हाइट्स", तिसरा मजला, सूट क्र. ३०१-३०४,<br>
-                            एम. जी. रोड, छत्रपती संभाजीनगर.
-                        </p>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 25px;">
-                    <a href="https://maps.google.com" target="_blank" class="btn-royal">
-                        <i class="fas fa-map-location-dot"></i> गुगल मॅप्सवर मार्ग पहा
-                    </a>
-                </div>
+    <div class="detail-icon"><i class="fas fa-landmark-dome"></i></div>
+    <div>
+        <div class="step-time">नवीन कार्यालयाचा पत्ता</div>
+        <p style="margin-top: 4px; line-height: 1.6;">
+            <a href="https://maps.app.goo.gl/ZUfHKEooktqGYojv5?g_st=ac" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               style="color: #fff; text-decoration: underline; text-decoration-color: #d4af37; text-underline-offset: 4px; transition: color 0.3s;"
+               onmouseover="this.style.color='#d4af37'" 
+               onmouseout="this.style.color='#fff'">
+                "श्रीफळ इव्हेंट", सरस्वती नगर, जामनेर रोड, श्रीकृष्णा इंजिनियरिंग च्या मागे , दत्त मंदिर समोर , भुसावळ, 425201
+            </a>
+        </p>
+    </div>
+</div>
             </section>
 
             <section class="royal-card">
@@ -669,20 +577,13 @@
 
                 <div class="stepper">
                     <div class="step-item">
-                        <div class="step-time">सकाळी ०८:३० ते १०:००</div>
-                        <div class="step-title">मंगल वास्तुपूजन व सत्यनारायण महापूजा</div>
+                        <div class="step-time">सकाळी १०:००</div>
+                        <div class="step-title">सत्यनारायण पूजा</div>
                     </div>
+                
                     <div class="step-item">
-                        <div class="step-time">सकाळी १०:०० ते १०:४५</div>
-                        <div class="step-title">सुवर्ण फीत कापणे व मंगल दीपप्रज्वलन</div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-time">सकाळी १०:४५ ते १२:३०</div>
-                        <div class="step-title">स्नेहीजनांचे स्वागत व मान्यवरांचा सत्कार</div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-time">दुपारी १२:३० नंतर</div>
-                        <div class="step-title">शाही स्नेहभोजन व महाप्रसाद</div>
+                        <div class="step-time">संध्याकाळी ६:०० नंतर</div>
+                        <div class="step-title">अल्पोपाहार व प्रसाद</div>
                     </div>
                 </div>
             </section>
@@ -722,70 +623,36 @@
         </div>
         <div class="showcase-grid">
             <div class="showcase-tile">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&fit=crop" alt="शाही विवाह">
+                <img src="img1.jpeg" alt="विवाह सोहळा">
                 <div class="tile-gradient">
-                    <h4>विवाह</h4>
+                    <h4>विवाह सोहळा</h4>
                 </div>
             </div>
             <div class="showcase-tile">
                 <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&fit=crop" alt="कॉर्पोरेट इव्हेंट्स">
                 <div class="tile-gradient">
-                    <h4>भव्य बिझनेस कॉन्फरन्स</h4>
+                    <h4>कॉर्पोरेट इव्हेंट्स</h4>
                 </div>
             </div>
             <div class="showcase-tile">
-                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&fit=crop" alt="सांस्कृतिक महोत्सव">
+                <img src="img3.jpeg" alt="वाढदिवस सोहळा">
                 <div class="tile-gradient">
-                    <h4>भव्य संगीत व सांस्कृतिक रजनी</h4>
+                    <h4>वाढदिवस सोहळा</h4>
                 </div>
             </div>
             <div class="showcase-tile">
-                <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&fit=crop" alt="थीम पार्टी">
+                <img src="img2.jpeg" alt="डोहाळे जेवण">
                 <div class="tile-gradient">
-                    <h4>लक्झरी कॉन्सर्ट व थीम्स</h4>
+                    <h4>डोहाळे जेवण</h4>
+                </div>
+            </div>
+            <div class="showcase-tile">
+                <img src="img5.jpeg" alt="थीम पार्टी">
+                <div class="tile-gradient">
+                    <h4>थीम पार्टी व संगीत</h4>
                 </div>
             </div>
         </div>
-
-        <section class="royal-card rsvp-container">
-            <div class="section-headline" style="margin-bottom: 15px;">
-                <h2>उपस्थिती नोंदणी (RSVP)</h2>
-            </div>
-            <p style="text-align: center; color: #ecd3b6; margin-bottom: 22px; font-size: 0.95rem;">
-                सोहळ्याच्या नियोजनासाठी कृपया आपली उपस्थिती निश्चित करावी.
-            </p>
-            <form onsubmit="handleRoyalRSVP(event)">
-                <div class="royal-input-group">
-                    <label for="name">आपले नाव</label>
-                    <input type="text" id="name" class="royal-control" placeholder="उदा. सयाजीराव काकडे" required>
-                </div>
-                <div class="royal-input-group">
-                    <label for="mobile">मोबाईल क्रमांक</label>
-                    <input type="tel" id="mobile" class="royal-control" placeholder="उदा. 9876543210" required>
-                </div>
-                <div class="royal-input-group">
-                    <label for="guests">उपस्थित सदस्य संख्या</label>
-                    <select id="guests" class="royal-control">
-                        <option value="१ व्यक्ती">१ व्यक्ती</option>
-                        <option value="२ व्यक्ती">२ व्यक्ती</option>
-                        <option value="सपरिवार (३ किंवा अधिक व्यक्ती)">सपरिवार (३ किंवा अधिक)</option>
-                    </select>
-                </div>
-                <div style="text-align: center; margin-top: 25px;">
-                    <button type="submit" class="btn-royal" style="width: 100%;">
-                        <i class="fas fa-gem"></i> उपस्थिती निश्चित करा
-                    </button>
-                </div>
-            </form>
-
-            <a href="https://www.instagram.com/pixels_surprise?stkn=M3B0dzg5dzQxcGls" target="_blank" class="partner-card" title="Follow @pixelssurprise on Instagram">
-                <p>✨ डिजिटल निमंत्रण व संकल्पना भागीदार ✨</p>
-                <div class="partner-tag">
-                    <i class="fab fa-instagram"></i>
-                    <span>pixelssurprise</span>
-                </div>
-            </a>
-        </section>
 
     </main>
 
@@ -795,7 +662,8 @@
         
         <div class="footer-contacts">
             <a href="tel:+919503254353"><i class="fas fa-phone-volume"></i> +91 9503254353</a>
-            <a href="mailto:contact@shriphalevents.com"><i class="fas fa-envelope-open-text"></i> contact@shriphalevents.com</a>
+            <a href="tel:+919403097353"><i class="fas fa-phone-volume"></i> +91 9403097353</a>
+            <a href="mailto:Shriphalevents@gmail.com"><i class="fas fa-envelope-open-text"></i> contact@shriphalevents.com</a>
             <a href="https://www.instagram.com/shriphalevents?stkn=MWNtcXdnYnp4OWdqcg==" target="_blank"><i class="fab fa-instagram" style="color: #e1306c;"></i> @shriphalevents</a>
         </div>
 
@@ -892,18 +760,6 @@
             requestAnimationFrame(renderEngine);
         }
         renderEngine();
-
-        // 3. RSVP Handler to WhatsApp Instant Pass
-        function handleRoyalRSVP(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const mobile = document.getElementById('mobile').value;
-            const guests = document.getElementById('guests').value;
-
-            const text = `*श्रीफळ इव्हेंट मॅनेजमेंट कार्यालय उद्घाटन सोहळा*%0A%0Aसस्नेह नमस्कार!%0Aमी *${encodeURIComponent(name)}* (मोबाईल: ${encodeURIComponent(mobile)}), नवीन कार्यालय वास्तुशांत व उद्घाटन सोहळ्यास *${encodeURIComponent(guests)}* उपस्थित राहणार आहे.%0A%0A_(Powered by pixelssurprise)_`;
-            
-            window.open(`https://wa.me/919503254353?text=${text}`, '_blank');
-        }
     </script>
 </body>
 </html>

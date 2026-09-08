@@ -240,6 +240,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            padding: 30px 20px;
         }
 
         .launch-badge {
@@ -286,26 +287,47 @@
             margin: 0 auto 20px;
         }
 
+        /* Fully Responsive Website Link Badge */
         .website-preview-badge {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 26px;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            max-width: 100%;
+            padding: 10px 22px;
             border-radius: 50px;
-            background: rgba(10, 0, 3, 0.8);
+            background: rgba(10, 0, 3, 0.85);
             border: 1px dashed rgba(212, 175, 55, 0.7);
             color: #f7e6c4;
             font-family: 'Cinzel', serif;
-            font-size: 1.05rem;
-            letter-spacing: 1.5px;
+            font-size: clamp(0.85rem, 3.2vw, 1.05rem);
+            letter-spacing: 1px;
             box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.15);
+            text-decoration: none;
             transition: all 0.3s ease;
+            margin: 0 auto;
         }
 
         .website-preview-badge:hover {
             border-color: #f6d88c;
-            transform: scale(1.03);
+            transform: scale(1.02);
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            color: #fff;
+        }
+
+        .website-url-text {
+            word-break: break-all;
+            color: #f7e6c4;
+            font-weight: 700;
+        }
+
+        .website-date-tag {
+            color: #d4af37;
+            font-size: 0.85rem;
+            border-left: 1px solid rgba(212, 175, 55, 0.45);
+            padding-left: 10px;
+            white-space: nowrap;
         }
 
         /* --- 2-COL DETAILS & TIMELINE --- */
@@ -568,26 +590,37 @@
             color: #d4af37;
         }
 
+        /* Optimized Mobile Layout */
         @media(max-width: 600px) {
             .royal-card {
-                padding: 25px 18px;
+                padding: 24px 16px;
             }
             .section-headline h2 {
-                font-size: 1.4rem;
+                font-size: 1.35rem;
             }
             .main-heading {
                 font-size: 2.1rem;
             }
             .countdown-gem {
-                padding: 10px 14px;
-                min-width: 65px;
+                padding: 10px 12px;
+                min-width: 62px;
             }
             .countdown-gem span {
                 font-size: 1.5rem;
             }
             .website-preview-badge {
-                font-size: 0.88rem;
-                padding: 10px 18px;
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 12px 16px;
+                gap: 6px;
+            }
+            .website-date-tag {
+                border-left: none;
+                border-top: 1px solid rgba(212, 175, 55, 0.3);
+                padding-left: 0;
+                padding-top: 5px;
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -603,7 +636,7 @@
         <div class="sub-tag">|| श्री गणेशाय नमः ||</div>
         <h1 class="main-heading gold-metallic-text">श्रीफळ इव्हेंट मॅनेजमेंट</h1>
         <p class="hero-desc">
-            आपला स्नेह आणि विश्वासाच्या बळावर, स्वप्नांना नवे पंख देत आम्ही पदार्पण करत आहोत आमच्या स्वतःच्या हक्काच्या भव्य, सुसज्ज अशा नवीन कार्यालयात!
+            आई श्री रेणुका मातेचा अर्शिवाद आणि आपण सर्वानी आमच्या श्रीफळ इव्हेंट्स आणि मॅनेजमेंटला दिलेला भरभरून उत्स्फुर्त प्रतिसाद व प्रेमामुळे आम्ही स्वतःच्या नवीन ऑफिसमध्ये पदार्पण करत आहोत.
         </p>
 
         <div class="royal-divider">
@@ -653,13 +686,13 @@
                 अधिकृत संकेतस्थळाचे भव्य लोकार्पण
             </h2>
             <p class="launch-desc">
-                नवीन कार्यालयाच्या उद्घाटनाच्या याच सुवर्ण क्षणी, आपल्या सेवेला डिजिटल स्वरूप देण्यासाठी <strong>श्रीफळ इव्हेंट मॅनेजमेंट</strong>च्या अधिकृत संकेतस्थळाचे (Official Website) थेट उद्घाटन होणार आहे! आता घरबसल्या आपले शाही सोहळे नियोजित करणे होणार आणखी सोपे.
+                नवीन कार्यालयाच्या उद्घाटनाच्या सुवर्ण क्षणी, आपल्या सेवेला डिजिटल स्वरूप देण्यासाठी <strong>श्रीफळ इव्हेंट मॅनेजमेंट</strong>च्या अधिकृत संकेतस्थळाचे (Official Website) थेट उद्घाटन होणार आहे! आता घरबसल्या आपले शाही सोहळे नियोजित करणे होणार आणखी सोपे.
             </p>
-            <div class="website-preview-badge">
+            <a href="https://shriphalevents.com" target="_blank" rel="noopener noreferrer" class="website-preview-badge">
                 <i class="fas fa-globe" style="color: #d4af37;"></i>
-                <span>https.shriphalevents.com</span>
-                <span style="color: #d4af37; font-size: 0.8rem; border-left: 1px solid rgba(212,175,55,0.4); padding-left: 10px;">Coming Live • १७ सप्टेंबर</span>
-            </div>
+                <span class="website-url-text">https://shriphalevents.com</span>
+                <span class="website-date-tag">Coming Live • १७ सप्टेंबर</span>
+            </a>
         </section>
 
         <div class="luxury-grid-2">
@@ -713,18 +746,15 @@
                         <div class="step-time">सकाळी १०:००</div>
                         <div class="step-title">सत्यनारायण पूजा</div>
                     </div>
-                
-                    <div class="step-item">
-                        <div class="step-time">संध्याकाळी ५:००</div>
-                       <div class="step-title" style="color: #f6d88c;">
-                            <i class="fas fa-laptop-code" style="color: #d4af37; margin-right: 6px;"></i>
-                            अधिकृत संकेतस्थळाचे अनावरण (Website Launch)
-                        </div>
-                    </div>
 
                     <div class="step-item">
                         <div class="step-time">संध्याकाळी ६:०० नंतर</div>
                         <div class="step-title">अल्पाहार व प्रसाद</div>
+
+                        <div class="step-title" style="color: #f6d88c;">
+                            <i class="fas fa-laptop-code" style="color: #d4af37; margin-right: 6px;"></i>
+                            अधिकृत संकेतस्थळाचे अनावरण (Website Launch)
+                        </div>
                     </div>
                 </div>
             </section>
